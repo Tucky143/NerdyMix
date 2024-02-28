@@ -1,22 +1,63 @@
 package net.nerdypuzzle.forgemixins;
 
+import freemarker.template.Template;
+import net.mcreator.generator.Generator;
+import net.mcreator.generator.template.InlineTemplatesHandler;
+import net.mcreator.generator.template.base.BaseDataModelProvider;
+import net.mcreator.io.FileIO;
 import net.mcreator.plugin.JavaPlugin;
 import net.mcreator.plugin.Plugin;
-import net.mcreator.plugin.events.PreGeneratorsLoadingEvent;
-import net.nerdypuzzle.forgemixins.parts.PluginElementTypes;
+import net.mcreator.plugin.PluginLoader;
+import net.mcreator.plugin.events.workspace.MCreatorLoadedEvent;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 public class Launcher extends JavaPlugin {
 
-	private static final Logger LOG = LogManager.getLogger("Loot modifier");
+	private static final Logger LOG = LogManager.getLogger("Forge mixins");
 
 	public Launcher(Plugin plugin) {
 		super(plugin);
 
-		addListener(PreGeneratorsLoadingEvent.class, e -> PluginElementTypes.load());
+		addListener(MCreatorLoadedEvent.class, event -> {
+			Generator currentGenerator = event.getMCreator().getGenerator();
+			if (currentGenerator != null) {
+				Set<String> fileNames = PluginLoader.INSTANCE.getResourcesInPackage(currentGenerator.getGeneratorName() + ".workspacebase");
+				Map<String, Object> dataModel = (new BaseDataModelProvider(event.getMCreator().getWorkspace().getGenerator())).provide();
+				Iterator var4 = fileNames.iterator();
 
-		LOG.info("Loot modifier plugin was loaded");
+				while(var4.hasNext()) {
+					String file = (String)var4.next();
+					if (file.contains("build.gradle")) {
+						InputStream stream = PluginLoader.INSTANCE.getResourceAsStream(file);
+						File generatorFile = new File(event.getMCreator().getWorkspace().getWorkspaceFolder(), file.replace(currentGenerator.getGeneratorName() + "/workspacebase", ""));
+						try {
+							String contents = IOUtils.toString(stream, StandardCharsets.UTF_8);
+							Template freemarkerTemplate = InlineTemplatesHandler.getTemplate(contents);
+							StringWriter stringWriter = new StringWriter();
+							freemarkerTemplate.process(dataModel, stringWriter, InlineTemplatesHandler.getConfiguration().getObjectWrapper());
+							FileIO.writeStringToFile(stringWriter.getBuffer().toString(), generatorFile);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						break;
+					}
+				}
+			}
+		});
+
+		LOG.info("Forge mixins plugin was loaded");
 	}
 
 }
