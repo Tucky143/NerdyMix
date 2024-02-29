@@ -1,10 +1,10 @@
 <#assign mixins = []>
 <#list w.getWorkspace().getModElements() as element>
-  <#assign providedmixins = false>
+  <#assign providedmixins = []>
   <#if element.getGeneratableElement().mixins??>
     <#assign providedmixins = element.getGeneratableElement().mixins>
   </#if>
-  <#if providedmixins != false>
+  <#if providedmixins?has_content>
     <#list providedmixins as mixin>
        <#if !mixins?seq_contains(mixin)>
          <#assign mixins += [mixin]>
