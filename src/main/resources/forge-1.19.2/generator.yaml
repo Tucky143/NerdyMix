@@ -68,6 +68,7 @@ base_templates:
       - ${w.hasElementsOfType('gamerule')}
       - ${w.hasElementsOfType('feature')}
       - "${w.getGElementsOfType('biome')?filter(e -> e.spawnBiome || e.spawnInCaves || e.spawnBiomeNether)?size != 0}"
+      - ${w.hasElementsOfType('endbiome')}
   - template: elementinits/javamodels.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/init/@JavaModNameModels.java"
     condition: hasJavaModels()
