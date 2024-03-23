@@ -40,8 +40,6 @@ public class MixinGUI extends ModElementGUI<Mixin> {
         return this.codeEditorView.showView();
     }
     protected void initGUI() {
-        JPanel panel = new JPanel(new BorderLayout());
-        addPage(panel);
     }
 
     protected AggregatedValidationResult validatePage(int page) {
