@@ -5,7 +5,7 @@
   "javaplugin": "net.nerdypuzzle.forgemixins.Launcher",
   "info": {
     "name": "Forge mixins",
-    "version": "1.0",
+    "version": "1.1",
     "description": "Adds support for mixins on forge",
     "author": "NerdyPuzzle"
   }
