@@ -9,18 +9,15 @@ import net.mcreator.ui.views.ViewBase;
 import net.mcreator.workspace.elements.FolderElement;
 import net.mcreator.workspace.elements.ModElement;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.util.List;
 
 public class MixinGUI extends ModElementGUI<Mixin> {
     private final CodeEditorView codeEditorView;
-    private Mixin generatableElement;
 
     public MixinGUI(MCreator mcreator, ModElement modElement, boolean editingMode) {
         super(mcreator, modElement, editingMode);
-        generatableElement = new Mixin(modElement);
+        Mixin generatableElement = new Mixin(modElement);
         List<File> modElementFiles = mcreator.getGenerator().getModElementGeneratorTemplatesList(generatableElement).stream().map(GeneratorTemplate::getFile).toList();
         File modElementFile = (File)modElementFiles.get(0);
         if (!editingMode) {
@@ -31,9 +28,6 @@ public class MixinGUI extends ModElementGUI<Mixin> {
             modElement.setCodeLock(true);
         }
         this.codeEditorView = new CodeEditorView(mcreator, modElementFile);
-
-        this.initGUI();
-        super.finalizeGUI();
     }
 
     public ViewBase showView() {
