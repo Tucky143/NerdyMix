@@ -21,7 +21,7 @@ public class MixinGUI extends ModElementGUI<Mixin> {
         List<File> modElementFiles = mcreator.getGenerator().getModElementGeneratorTemplatesList(generatableElement).stream().map(GeneratorTemplate::getFile).toList();
         File modElementFile = (File)modElementFiles.get(0);
         if (!editingMode) {
-            modElement.setParentFolder(FolderElement.dummyFromPath(modElement.getFolderPath()));
+            modElement.setParentFolder(FolderElement.findFolderByPath(modElement.getWorkspace(), modElement.getFolderPath()));
             mcreator.getGenerator().generateElement(generatableElement);
             mcreator.getWorkspace().addModElement(modElement);
             mcreator.getWorkspace().getModElementManager().storeModElement(generatableElement);
