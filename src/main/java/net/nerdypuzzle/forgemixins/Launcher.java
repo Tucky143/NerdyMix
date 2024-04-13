@@ -3,6 +3,7 @@ package net.nerdypuzzle.forgemixins;
 import freemarker.template.Template;
 import net.mcreator.element.ModElementType;
 import net.mcreator.generator.Generator;
+import net.mcreator.generator.GeneratorFlavor;
 import net.mcreator.generator.template.InlineTemplatesHandler;
 import net.mcreator.generator.template.base.BaseDataModelProvider;
 import net.mcreator.io.FileIO;
@@ -37,25 +38,27 @@ public class Launcher extends JavaPlugin {
 		addListener(MCreatorLoadedEvent.class, event -> {
 			Generator currentGenerator = event.getMCreator().getGenerator();
 			if (currentGenerator != null) {
-				Set<String> fileNames = PluginLoader.INSTANCE.getResourcesInPackage(currentGenerator.getGeneratorName() + ".workspacebase");
-				Map<String, Object> dataModel = (new BaseDataModelProvider(event.getMCreator().getWorkspace().getGenerator())).provide();
-				Iterator var4 = fileNames.iterator();
+				if (currentGenerator.getGeneratorConfiguration().getGeneratorFlavor() == GeneratorFlavor.FORGE) {
+					Set<String> fileNames = PluginLoader.INSTANCE.getResourcesInPackage(currentGenerator.getGeneratorName() + ".workspacebase");
+					Map<String, Object> dataModel = (new BaseDataModelProvider(event.getMCreator().getWorkspace().getGenerator())).provide();
+					Iterator var4 = fileNames.iterator();
 
-				while(var4.hasNext()) {
-					String file = (String)var4.next();
-					if (file.contains("build.gradle")) {
-						InputStream stream = PluginLoader.INSTANCE.getResourceAsStream(file);
-						File generatorFile = new File(event.getMCreator().getWorkspace().getWorkspaceFolder(), file.replace(currentGenerator.getGeneratorName() + "/workspacebase", ""));
-						try {
-							String contents = IOUtils.toString(stream, StandardCharsets.UTF_8);
-							Template freemarkerTemplate = InlineTemplatesHandler.getTemplate(contents);
-							StringWriter stringWriter = new StringWriter();
-							freemarkerTemplate.process(dataModel, stringWriter, InlineTemplatesHandler.getConfiguration().getObjectWrapper());
-							FileIO.writeStringToFile(stringWriter.getBuffer().toString(), generatorFile);
-						} catch (Exception e) {
-							e.printStackTrace();
+					while (var4.hasNext()) {
+						String file = (String) var4.next();
+						if (file.contains("build.gradle")) {
+							InputStream stream = PluginLoader.INSTANCE.getResourceAsStream(file);
+							File generatorFile = new File(event.getMCreator().getWorkspace().getWorkspaceFolder(), file.replace(currentGenerator.getGeneratorName() + "/workspacebase", ""));
+							try {
+								String contents = IOUtils.toString(stream, StandardCharsets.UTF_8);
+								Template freemarkerTemplate = InlineTemplatesHandler.getTemplate(contents);
+								StringWriter stringWriter = new StringWriter();
+								freemarkerTemplate.process(dataModel, stringWriter, InlineTemplatesHandler.getConfiguration().getObjectWrapper());
+								FileIO.writeStringToFile(stringWriter.getBuffer().toString(), generatorFile);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							break;
 						}
-						break;
 					}
 				}
 			}
