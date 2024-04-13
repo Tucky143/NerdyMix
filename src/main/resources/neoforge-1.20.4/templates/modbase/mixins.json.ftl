@@ -16,7 +16,6 @@
   "required": true,
   "package": "${package}.mixins",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "mixins.${modid}.refmap.json",
   "mixins": [
     <#if mixins?has_content>
       <#list mixins as mixin>
