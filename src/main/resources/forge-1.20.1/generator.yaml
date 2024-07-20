@@ -52,7 +52,7 @@ base_templates:
   - template: modbase/mod.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/@JavaModName.java"
     canLock: true
-  - template: modbase/mods.toml.ftl
+  - template: modbase/neoforge.mods.toml.ftl
     writer: file
     name: "@RESROOT/META-INF/mods.toml"
   - template: pack.mcmeta.ftl # loaded from datapack generator
