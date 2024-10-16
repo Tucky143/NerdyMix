@@ -15,7 +15,7 @@
 {
   "required": true,
   "package": "${package}.mixins",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     <#if mixins?has_content>
       <#list mixins as mixin>
