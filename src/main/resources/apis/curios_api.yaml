@@ -33,17 +33,17 @@ forge-1.20.1:
     update_files:
         - ~
 
-neoforge-1.20.6:
+neoforge-1.21.1:
     gradle: |
         repositories {
         maven {
-          url = "https://maven.theillusivec4.top/"
+          url = "https://cursemaven.com"
           }
         }
         
         dependencies {
-          runtimeOnly "top.theillusivec4.curios:curios-neoforge:8.0.1+1.20.6"
-          compileOnly "top.theillusivec4.curios:curios-neoforge:8.0.1+1.20.6:api"
+          runtimeOnly "curse.maven:adorned-1036809:5740650"
+          compileOnly "curse.maven:adorned-1036809:5740650"
         }
 
     update_files:

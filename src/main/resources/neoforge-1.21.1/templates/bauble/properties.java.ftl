@@ -12,7 +12,7 @@ public class ${JavaModName}CuriosProperties {
 			<#if item.getModElement().getTypeString() == "curiosbauble">
 				<#list item.customProperties.entrySet() as property>
 				ItemProperties.register(${JavaModName}Items.${item.getModElement().getRegistryNameUpper()}.get(),
-					new ResourceLocation("${modid}:${item.getModElement().getRegistryName()}_${property.getKey()}"),
+					ResourceLocation.parse("${modid}:${item.getModElement().getRegistryName()}_${property.getKey()}"),
 					(itemStackToRender, clientWorld, entity, itemEntityId) ->
 						<#if hasProcedure(property.getValue())>
 							(float) <@procedureCode property.getValue(), {
