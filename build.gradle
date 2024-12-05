@@ -10,24 +10,18 @@ repositories {
     flatDir { dirs mcreator_path + '/lib' }
 }
 
-group = 'net.nerdypuzzle.curios'
+group = 'com.esmods.cpapi'
 version = new JsonSlurper().parse(file('src/main/resources/plugin.json'))['info']['version']
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 dependencies {
     implementation project(':MCreator')
-
-    project(':MCreator').afterEvaluate(() ->
-            project(":MCreator").configurations.named("implementation").get().dependencies.each {
-                //noinspection ForeignDelegate
-                implementation it
-            }
-    )
+    implementation fileTree(dir: 'C:/MCreator/lib', include: ['*.jar'])
 }
 
 tasks.jar {
-    archiveFileName.set("Nerdys_CuriosAPI_Plugin.zip")
+    archiveFileName.set("AdornedCuriosAPI_Plugin.zip")
 }
 
 tasks.register('runMCreatorWithPlugin', JavaExec) {
