@@ -33,11 +33,9 @@ public class ${name}Renderer implements ICurioRenderer {
 	this.model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
 	this.model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 	VertexConsumer vertexconsumer = ItemRenderer
-		.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(TEXTURE), false,
-			stack.hasFoil());
+		.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(TEXTURE), false);
 	this.model
-		.renderToBuffer(matrixStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F,
-			1.0F, 1.0F);
+		.renderToBuffer(matrixStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY);
   }
 
 }

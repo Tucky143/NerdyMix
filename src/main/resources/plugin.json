@@ -7,7 +7,7 @@
   ],
   "info": {
     "name": "Adorned (Curios API) Plugin",
-    "version": "5.3",
+    "version": "5.3.1",
     "description": "Adds Adorned (Curios API) support to MCreator based on Nerdy'sPuzzle Curios API Plugin",
     "author": "MagicalAlexey, NerdyPuzzle"
   }
