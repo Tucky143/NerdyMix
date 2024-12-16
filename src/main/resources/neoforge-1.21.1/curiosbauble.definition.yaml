@@ -111,3 +111,5 @@ list_templates:
 localizationkeys:
   - key: item.@modid.@registryname
     mapto: name
+  - fromlist: data.getFixedSpecialInformation()
+    key: item.@modid.@registryname.description_@item_index

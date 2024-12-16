@@ -3,11 +3,11 @@
   "weight": 10,
   "javaplugin": "net.nerdypuzzle.curios.Launcher",
   "supportedversions": [
-    2024003
+    2024004
   ],
   "info": {
     "name": "Adorned (Curios API) Plugin",
-    "version": "5.3.1",
+    "version": "5.4",
     "description": "Adds Adorned (Curios API) support to MCreator based on Nerdy'sPuzzle Curios API Plugin",
     "author": "MagicalAlexey, NerdyPuzzle"
   }

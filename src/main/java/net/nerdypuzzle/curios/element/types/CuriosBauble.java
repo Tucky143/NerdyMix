@@ -25,8 +25,9 @@ import net.mcreator.workspace.resources.Model;
 import net.mcreator.workspace.resources.Texture;
 import net.mcreator.workspace.resources.TexturedModel;
 import net.mcreator.workspace.resources.Model.Type;
+import net.mcreator.element.types.interfaces.*;
 
-public class CuriosBauble extends GeneratableElement implements IItem, IItemWithModel, ITabContainedElement, IItemWithTexture {
+public class CuriosBauble extends GeneratableElement implements IItem, IItemWithModel, ITabContainedElement, ISpecialInfoHolder, IItemWithTexture {
     public int renderType;
     public TextureHolder texture;
     public String customModelName;
@@ -168,6 +169,9 @@ public class CuriosBauble extends GeneratableElement implements IItem, IItemWith
 
     public TextureHolder getTexture() {
         return this.texture;
+    }
+    public StringListProcedure getSpecialInfoProcedure() {
+        return specialInformation;
     }
 
     public boolean hasNormalModel() {

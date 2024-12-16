@@ -161,7 +161,7 @@ public class ${name}Item extends Item implements ICurioItem {
 	}
 	</#if>
 
-	<@addSpecialInformation data.specialInformation/>
+<@addSpecialInformation data.specialInformation, "item." + modid + "." + registryname/>
 
 	<#if hasProcedure(data.onRightClickedInAir) || data.hasInventory()>
 	@Override public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
