@@ -1,6 +1,7 @@
 name: NeoForge for @minecraft (@buildfileversion)
 status: stable
 buildfileversion: 21.1.65
+subversion: 1.2 # force setup re-run to update build script for MCREATOR_JVM_OPTIONS
 
 import:
   - datapack-1.21.1
@@ -30,6 +31,7 @@ import_formatter:
     ImmutableSet: com.google.common.collect
     Iterables: com.google.common.collect
     Attributes: net.minecraft.world.entity.ai.attributes
+    Keyframe: net.minecraft.client.animation
 
 # base generator roots
 source_root: "@WORKSPACEROOT/src/main/java"
@@ -50,8 +52,9 @@ armor_textures_dir: "@MODASSETSROOT/textures/models/armor"
 other_textures_dir: "@MODASSETSROOT/textures"
 
 # vanilla resources
-vanilla_block_textures_dir: ".*-client-extra.jar!/assets/minecraft/textures/block"
-vanilla_item_textures_dir: ".*-client-extra.jar!/assets/minecraft/textures/item"
+vanilla_resources_jar: ".*-client-extra.jar"
+vanilla_block_textures_dir: "assets/minecraft/textures/block"
+vanilla_item_textures_dir: "assets/minecraft/textures/item"
 
 base_templates:
   - template: modbase/mixins.json.ftl
@@ -85,6 +88,7 @@ base_templates:
     condition_any:
       - "${w.getGElementsOfType('biome')?filter(e -> e.spawnBiome || e.spawnInCaves || e.spawnBiomeNether || e.hasVines() || e.hasFruits())?size != 0}"
       - "${w.hasElementsOfType('feature')}"
+      - "${w.hasElementsOfType('endbiome')}"
   - template: modbase/enumextensions.json.ftl
     writer: json
     name: "@RESROOT/META-INF/enumextensions.json"
@@ -102,6 +106,11 @@ sources_setup_tasks:
     cleanupBeforeCopy: true
     template: javamodel.java.ftl
     to: "@SRCROOT/@BASEPACKAGEPATH/client/model"
+  - task: copy_model_animations
+    type: JAVA_viatemplate
+    cleanupBeforeCopy: true
+    template: javaanimation.java.ftl
+    to: "@SRCROOT/@BASEPACKAGEPATH/client/model/animations"
 
 tags:
   template: tags.json.ftl # loaded from datapack generator

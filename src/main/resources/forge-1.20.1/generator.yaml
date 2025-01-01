@@ -1,7 +1,7 @@
 name: Minecraft Forge for @minecraft (@buildfileversion)
 status: lts
 buildfileversion: 47.3.0
-subversion: 1.0 # force setup re-run to update Gradle wrapper to work with Java 21
+subversion: 1.2 # force setup re-run to update build script for MCREATOR_JVM_OPTIONS
 
 import:
   - datapack-1.20.1
@@ -26,6 +26,7 @@ import_formatter:
     Codec: com.mojang.serialization
     SoundEvent: net.minecraft.sounds
     Attributes: net.minecraft.world.entity.ai.attributes
+    Keyframe: net.minecraft.client.animation
 
 # base generator roots
 source_root: "@WORKSPACEROOT/src/main/java"
@@ -46,14 +47,14 @@ armor_textures_dir: "@MODASSETSROOT/textures/models/armor"
 other_textures_dir: "@MODASSETSROOT/textures"
 
 # vanilla resources
-vanilla_block_textures_dir: "client-extra.jar!/assets/minecraft/textures/block"
-vanilla_item_textures_dir: "client-extra.jar!/assets/minecraft/textures/item"
+vanilla_resources_jar: "client-extra.jar"
+vanilla_block_textures_dir: "assets/minecraft/textures/block"
+vanilla_item_textures_dir: "assets/minecraft/textures/item"
 
 base_templates:
   - template: modbase/mixins.json.ftl
     writer: json
     name: "@RESROOT/mixins.@modid.json"
-    canLock: true
   - template: modbase/mod.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/@JavaModName.java"
   - template: modbase/mods.toml.ftl
@@ -93,6 +94,11 @@ sources_setup_tasks:
     cleanupBeforeCopy: true
     template: javamodel.java.ftl
     to: "@SRCROOT/@BASEPACKAGEPATH/client/model"
+  - task: copy_model_animations
+    type: JAVA_viatemplate
+    cleanupBeforeCopy: true
+    template: javaanimation.java.ftl
+    to: "@SRCROOT/@BASEPACKAGEPATH/client/model/animations"
 
 tags:
   template: tags.json.ftl

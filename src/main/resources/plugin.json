@@ -3,7 +3,7 @@
   "weight": 4200,
   "javaplugin": "net.nerdypuzzle.forgemixins.Launcher",
   "supportedversions": [
-    2024003
+    2024004
   ],
   "info": {
     "name": "Forge mixins",
