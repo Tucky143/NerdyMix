@@ -7,7 +7,7 @@
   ],
   "info": {
     "name": "Forge mixins",
-    "version": "1.4",
+    "version": "1.5",
     "description": "Adds support for mixins on forge and neoforge",
     "author": "NerdyPuzzle"
   }
