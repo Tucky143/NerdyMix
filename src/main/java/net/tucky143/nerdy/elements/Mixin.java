@@ -1,4 +1,4 @@
-package net.nerdypuzzle.forgemixins.element;
+package net.tucky143.nerdy.elements;
 
 import net.mcreator.element.GeneratableElement;
 import net.mcreator.workspace.elements.ModElement;

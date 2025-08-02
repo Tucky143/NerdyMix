@@ -10,7 +10,7 @@ repositories {
     flatDir { dirs mcreator_path + '/lib' }
 }
 
-group = 'net.nerdypuzzle.forgemixins'
+group = 'net.tucky143.mixins'
 version = new JsonSlurper().parse(file('src/main/resources/plugin.json'))['info']['version']
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
@@ -27,7 +27,7 @@ dependencies {
 }
 
 tasks.jar {
-    archiveFileName.set("forge_mixins.zip")
+    archiveFileName.set("nerdymix-2025.x.zip")
 }
 
 tasks.register('runMCreatorWithPlugin', JavaExec) {

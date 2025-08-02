@@ -1,14 +1,15 @@
 {
-  "id": "forge_mixins",
+  "id": "nerdymix",
   "weight": 4200,
-  "javaplugin": "net.nerdypuzzle.forgemixins.Launcher",
+  "javaplugin": "net.tucky143.nerdy.Launcher",
   "supportedversions": [
-    2024004
+    2025002,
+    2025001
   ],
   "info": {
-    "name": "Forge mixins",
-    "version": "1.5",
-    "description": "Adds support for mixins on forge and neoforge",
-    "author": "NerdyPuzzle"
+    "name": "NerdyMix",
+    "version": "1.0",
+    "description": "Adds a bunch of NerdyPuzzles plugins",
+    "author": "Tucky143"
   }
 }
