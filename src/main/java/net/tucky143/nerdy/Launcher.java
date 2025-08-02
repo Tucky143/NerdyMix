@@ -19,6 +19,8 @@ import net.tucky143.nerdy.elements.EndBiomeGUI;
 import net.tucky143.nerdy.elements.Mixin;
 import net.tucky143.nerdy.elements.MixinGUI;
 import net.tucky143.nerdy.parts.PluginElementTypes;
+import net.tucky143.nerdy.parts.PluginActions;
+import net.tucky143.nerdy.parts.PluginEventTriggers;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +31,7 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -38,6 +41,8 @@ import static net.mcreator.element.ModElementTypeLoader.register;
 public class Launcher extends JavaPlugin {
 
 	private static final Logger LOG = LogManager.getLogger("Mixins");
+	public static PluginActions ACTION_REGISTRY;
+	public static Set<Plugin> PLUGIN_INSTANCE = new HashSet<>();
 	public static void disableComponent(ModElementGUI gui, Field field) throws Exception {
 		field.setAccessible(true);
 		((JComponent)field.get(gui)).setEnabled(false);
@@ -45,8 +50,16 @@ public class Launcher extends JavaPlugin {
 
 	public Launcher(Plugin plugin) {
 		super(plugin);
+		PLUGIN_INSTANCE.add(plugin);
+
+		addListener(ModElementGUIEvent.BeforeLoading.class, event -> SwingUtilities.invokeLater(() -> {
+			PluginEventTriggers.dependencyWarning(event.getMCreator(), event.getModElementGUI());
+			PluginEventTriggers.interceptProcedurePanel(event.getMCreator(), event.getModElementGUI());
+		}));
 
 		addListener(MCreatorLoadedEvent.class, event -> {
+			ACTION_REGISTRY = new PluginActions(event.getMCreator());
+			SwingUtilities.invokeLater(() -> PluginEventTriggers.modifyMenus(event.getMCreator()));
 			Generator currentGenerator = event.getMCreator().getGenerator();
 			if (currentGenerator != null) {
 				if (currentGenerator.getGeneratorConfiguration().getGeneratorFlavor() == GeneratorFlavor.FORGE) {

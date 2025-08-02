@@ -1,9 +1,15 @@
 package net.tucky143.nerdy.parts;
 
 import net.mcreator.element.ModElementType;
+import net.mcreator.generator.GeneratorFlavor;
 import net.tucky143.nerdy.elements.*;
+import net.tucky143.nerdy.ui.modgui.AnimatedArmorGUI;
+import net.tucky143.nerdy.ui.modgui.AnimatedBlockGUI;
+import net.tucky143.nerdy.ui.modgui.AnimatedEntityGUI;
+import net.tucky143.nerdy.ui.modgui.AnimatedItemGUI;
 
 import static net.mcreator.element.ModElementTypeLoader.register;
+import static net.mcreator.generator.GeneratorFlavor.BaseLanguage.JAVA;
 
 public class PluginElementTypes {
     public static ModElementType<?> ENDBIOME;
@@ -12,6 +18,10 @@ public class PluginElementTypes {
     public static ModElementType<?> JEIRECIPE;
     public static ModElementType<?> ANVILRECIPE;
     public static ModElementType<?> JEIINFORMATION;
+    public static ModElementType<?> ANIMATEDBLOCK;
+    public static ModElementType<?> ANIMATEDITEM;
+    public static ModElementType<?> ANIMATEDENTITY;
+    public static ModElementType<?> ANIMATEDARMOR;
 
     public static void load() {
         JEIRECIPETYPE = register(
@@ -37,6 +47,22 @@ public class PluginElementTypes {
         ENDSTONE = register(
                 new ModElementType<>("endstone", (Character) null, EndstoneGUI::new, Endstone.class)
         );
+
+        ANIMATEDBLOCK = register(
+                new ModElementType<>("animatedblock", (Character) 'D', AnimatedBlockGUI::new, net.tucky143.nerdy.element.types.AnimatedBlock.class)
+        ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
+
+        ANIMATEDITEM = register(
+                new ModElementType<>("animateditem", (Character) 'I', AnimatedItemGUI::new, net.tucky143.nerdy.element.types.AnimatedItem.class)
+        ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
+
+        ANIMATEDENTITY = register(
+                new ModElementType<>("animatedentity", (Character) 'E', AnimatedEntityGUI::new, net.tucky143.nerdy.element.types.AnimatedEntity.class)
+        ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
+
+        ANIMATEDARMOR = register(
+                new ModElementType<>("animatedarmor", (Character) 'A', AnimatedArmorGUI::new, net.tucky143.nerdy.element.types.AnimatedArmor.class)
+        ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
 
     }
 
