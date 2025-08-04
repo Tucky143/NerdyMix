@@ -1,4 +1,4 @@
-package net.tucky143.nerdy.elements;
+package net.tucky143.nerdy.ui.modgui;
 
 import net.mcreator.minecraft.ElementUtil;
 import net.mcreator.ui.MCreator;
@@ -16,12 +16,12 @@ import net.mcreator.ui.validation.ValidationGroup;
 import net.mcreator.ui.validation.component.VComboBox;
 import net.mcreator.ui.validation.component.VTextField;
 import net.mcreator.ui.validation.validators.ConditionalItemListFieldValidator;
-import net.mcreator.ui.validation.validators.ItemListFieldValidator;
 import net.mcreator.ui.validation.validators.MCItemHolderValidator;
 import net.mcreator.ui.validation.validators.TextFieldValidator;
 import net.mcreator.ui.workspace.resources.TextureType;
 import net.mcreator.util.StringUtils;
 import net.mcreator.workspace.elements.ModElement;
+import net.tucky143.nerdy.elements.JeiRecipeType;
 import net.tucky143.nerdy.parts.JeiSlotList;
 import net.tucky143.nerdy.parts.WTextureComboBoxRenderer;
 

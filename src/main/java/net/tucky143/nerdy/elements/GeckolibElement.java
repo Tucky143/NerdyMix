@@ -1,4 +1,4 @@
-package net.tucky143.nerdy.element.types;
+package net.tucky143.nerdy.elements;
 
 import net.mcreator.ui.validation.AggregatedValidationResult;
 

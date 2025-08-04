@@ -1,4 +1,4 @@
-package net.tucky143.nerdy.elements;
+package net.tucky143.nerdy.ui.modgui;
 
 import net.mcreator.element.ModElementType;
 import net.mcreator.element.types.Biome;
@@ -17,6 +17,7 @@ import net.mcreator.ui.validation.AggregatedValidationResult;
 import net.mcreator.ui.validation.ValidationGroup;
 import net.mcreator.util.ListUtils;
 import net.mcreator.workspace.elements.ModElement;
+import net.tucky143.nerdy.elements.EndBiome;
 import net.tucky143.nerdy.parts.PluginElementTypes;
 
 import java.net.URI;

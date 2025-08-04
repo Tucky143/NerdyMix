@@ -39,12 +39,12 @@ import net.mcreator.util.ListUtils;
 import net.mcreator.util.StringUtils;
 import net.mcreator.workspace.elements.ModElement;
 import net.mcreator.workspace.elements.VariableTypeLoader;
-import net.tucky143.nerdy.element.types.AnimatedEntity;
-import net.tucky143.nerdy.element.types.GeckolibElement;
+import net.tucky143.nerdy.elements.AnimatedEntity;
+import net.tucky143.nerdy.elements.GeckolibElement;
 import net.tucky143.nerdy.parts.GeomodelRenderer;
+import net.tucky143.nerdy.parts.PluginElementTypes;
 import net.tucky143.nerdy.parts.PluginModelActions;
 import net.tucky143.nerdy.parts.WTextureComboBoxRenderer;
-import net.tucky143.nerdy.registry.PluginElementTypes;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;

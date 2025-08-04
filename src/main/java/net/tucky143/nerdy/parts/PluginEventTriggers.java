@@ -36,7 +36,7 @@ import net.mcreator.util.DesktopUtils;
 import net.mcreator.util.image.ImageUtils;
 import net.mcreator.workspace.elements.VariableTypeLoader;
 import net.tucky143.nerdy.Launcher;
-import net.tucky143.nerdy.element.types.GeckolibElement;
+import net.tucky143.nerdy.elements.GeckolibElement;
 import netscape.javascript.JSException;
 import netscape.javascript.JSObject;
 import org.w3c.dom.Element;

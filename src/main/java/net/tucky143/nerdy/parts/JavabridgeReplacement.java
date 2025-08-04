@@ -1,6 +1,5 @@
 package net.tucky143.nerdy.parts;
 
-import com.google.gson.Gson;
 import java.io.ByteArrayOutputStream;
 import java.util.*;
 import java.util.function.Function;
@@ -36,7 +35,7 @@ import net.mcreator.workspace.Workspace;
 import net.mcreator.workspace.elements.ModElement;
 import net.mcreator.workspace.elements.VariableType;
 import net.mcreator.workspace.elements.VariableTypeLoader;
-import net.tucky143.nerdy.element.types.AnimatedEntity;
+import net.tucky143.nerdy.elements.AnimatedEntity;
 import netscape.javascript.JSObject;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;

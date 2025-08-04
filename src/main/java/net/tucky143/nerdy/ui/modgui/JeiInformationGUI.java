@@ -1,4 +1,4 @@
-package net.tucky143.nerdy.elements;
+package net.tucky143.nerdy.ui.modgui;
 
 import net.mcreator.minecraft.ElementUtil;
 import net.mcreator.ui.MCreator;
@@ -10,6 +10,7 @@ import net.mcreator.ui.minecraft.MCItemListField;
 import net.mcreator.ui.modgui.ModElementGUI;
 import net.mcreator.ui.validation.AggregatedValidationResult;
 import net.mcreator.workspace.elements.ModElement;
+import net.tucky143.nerdy.elements.JeiInformation;
 
 import javax.annotation.Nullable;
 import javax.swing.*;

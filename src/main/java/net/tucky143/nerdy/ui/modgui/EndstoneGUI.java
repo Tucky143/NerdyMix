@@ -1,4 +1,4 @@
-package net.tucky143.nerdy.elements;
+package net.tucky143.nerdy.ui.modgui;
 
 import net.mcreator.generator.GeneratorFlavor;
 import net.mcreator.minecraft.ElementUtil;
@@ -13,6 +13,7 @@ import net.mcreator.ui.validation.AggregatedValidationResult;
 import net.mcreator.ui.validation.ValidationGroup;
 import net.mcreator.ui.validation.validators.MCItemHolderValidator;
 import net.mcreator.workspace.elements.ModElement;
+import net.tucky143.nerdy.elements.Endstone;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

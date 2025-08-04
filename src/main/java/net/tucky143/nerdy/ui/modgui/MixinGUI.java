@@ -1,4 +1,4 @@
-package net.tucky143.nerdy.elements;
+package net.tucky143.nerdy.ui.modgui;
 
 import net.mcreator.generator.GeneratorTemplate;
 import net.mcreator.ui.MCreator;
@@ -8,6 +8,7 @@ import net.mcreator.ui.validation.AggregatedValidationResult;
 import net.mcreator.ui.views.ViewBase;
 import net.mcreator.workspace.elements.FolderElement;
 import net.mcreator.workspace.elements.ModElement;
+import net.tucky143.nerdy.elements.Mixin;
 
 import javax.annotation.Nullable;
 import java.io.File;

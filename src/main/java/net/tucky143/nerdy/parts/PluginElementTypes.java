@@ -3,10 +3,7 @@ package net.tucky143.nerdy.parts;
 import net.mcreator.element.ModElementType;
 import net.mcreator.generator.GeneratorFlavor;
 import net.tucky143.nerdy.elements.*;
-import net.tucky143.nerdy.ui.modgui.AnimatedArmorGUI;
-import net.tucky143.nerdy.ui.modgui.AnimatedBlockGUI;
-import net.tucky143.nerdy.ui.modgui.AnimatedEntityGUI;
-import net.tucky143.nerdy.ui.modgui.AnimatedItemGUI;
+import net.tucky143.nerdy.ui.modgui.*;
 
 import static net.mcreator.element.ModElementTypeLoader.register;
 import static net.mcreator.generator.GeneratorFlavor.BaseLanguage.JAVA;
@@ -49,19 +46,19 @@ public class PluginElementTypes {
         );
 
         ANIMATEDBLOCK = register(
-                new ModElementType<>("animatedblock", (Character) 'D', AnimatedBlockGUI::new, net.tucky143.nerdy.element.types.AnimatedBlock.class)
+                new ModElementType<>("animatedblock", (Character) 'D', AnimatedBlockGUI::new, AnimatedBlock.class)
         ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
 
         ANIMATEDITEM = register(
-                new ModElementType<>("animateditem", (Character) 'I', AnimatedItemGUI::new, net.tucky143.nerdy.element.types.AnimatedItem.class)
+                new ModElementType<>("animateditem", (Character) 'I', AnimatedItemGUI::new, AnimatedItem.class)
         ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
 
         ANIMATEDENTITY = register(
-                new ModElementType<>("animatedentity", (Character) 'E', AnimatedEntityGUI::new, net.tucky143.nerdy.element.types.AnimatedEntity.class)
+                new ModElementType<>("animatedentity", (Character) 'N', AnimatedEntityGUI::new, AnimatedEntity.class)
         ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
 
         ANIMATEDARMOR = register(
-                new ModElementType<>("animatedarmor", (Character) 'A', AnimatedArmorGUI::new, net.tucky143.nerdy.element.types.AnimatedArmor.class)
+                new ModElementType<>("animatedarmor", (Character) 'A', AnimatedArmorGUI::new, AnimatedArmor.class)
         ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
 
     }

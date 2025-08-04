@@ -5,7 +5,7 @@ import net.mcreator.ui.component.entries.JSimpleEntriesList;
 import net.mcreator.ui.help.IHelpContext;
 import net.mcreator.ui.init.L10N;
 import net.mcreator.ui.laf.themes.Theme;
-import net.tucky143.nerdy.element.types.AnimatedItem;
+import net.tucky143.nerdy.elements.AnimatedItem;
 
 import javax.swing.*;
 import java.util.List;

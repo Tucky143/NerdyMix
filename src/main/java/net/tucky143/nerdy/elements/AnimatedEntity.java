@@ -1,4 +1,4 @@
-package net.tucky143.nerdy.element.types;
+package net.tucky143.nerdy.elements;
 
 import net.mcreator.blockly.data.BlocklyLoader;
 import net.mcreator.blockly.java.BlocklyToJava;
@@ -23,8 +23,8 @@ import net.mcreator.util.FilenameUtilsPatched;
 import net.mcreator.workspace.elements.ModElement;
 import net.mcreator.workspace.resources.Model;
 import net.mcreator.workspace.resources.Texture;
-import net.tucky143.nerdy.registry.PluginElementTypes;
 
+import net.tucky143.nerdy.parts.PluginElementTypes;
 import org.jetbrains.annotations.Nullable;
 import java.awt.*;
 import java.awt.image.BufferedImage;

@@ -18,9 +18,8 @@ import net.mcreator.ui.validation.ValidationGroup;
 import net.mcreator.ui.validation.Validator;
 import net.mcreator.ui.workspace.resources.TextureType;
 import net.mcreator.util.ListUtils;
-import net.mcreator.util.image.TiledImageUtils;
 import net.mcreator.workspace.Workspace;
-import net.tucky143.nerdy.element.types.AnimatedBlock;
+import net.tucky143.nerdy.elements.AnimatedBlock;
 import net.tucky143.nerdy.parts.GeomodelRenderer;
 import net.tucky143.nerdy.parts.PluginModelActions;
 
