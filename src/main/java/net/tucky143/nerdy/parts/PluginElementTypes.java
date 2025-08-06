@@ -19,6 +19,8 @@ public class PluginElementTypes {
     public static ModElementType<?> ANIMATEDITEM;
     public static ModElementType<?> ANIMATEDENTITY;
     public static ModElementType<?> ANIMATEDARMOR;
+    public static ModElementType<?> CURIOSBAUBLE;
+    public static ModElementType<?> CURIOSSLOT;
 
     public static void load() {
         JEIRECIPETYPE = register(
@@ -59,6 +61,14 @@ public class PluginElementTypes {
 
         ANIMATEDARMOR = register(
                 new ModElementType<>("animatedarmor", (Character) 'A', AnimatedArmorGUI::new, AnimatedArmor.class)
+        ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
+
+        CURIOSBAUBLE = register(
+                new ModElementType<>("curiosbauble", (Character) 'B', CuriosBaubleGUI::new, CuriosBauble.class)
+        ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
+
+        CURIOSSLOT = register(
+                new ModElementType<>("curiosslot", (Character) 'S', CuriosSlotGUI::new, CuriosSlot.class)
         ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
 
     }

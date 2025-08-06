@@ -1,0 +1,1 @@
+Add the registry name (ex: minecraft:zombie) of the entities that should have the slot here.
