@@ -63,6 +63,7 @@ public class Launcher extends JavaPlugin {
 			Generator currentGenerator = event.getMCreator().getGenerator();
 			if (currentGenerator != null) {
 				if (currentGenerator.getGeneratorConfiguration().getGeneratorFlavor() == GeneratorFlavor.FORGE) {
+					GradlePropertiesUpdater.main(event.getMCreator().getWorkspaceFolder().toString());
 					Set<String> fileNames = PluginLoader.INSTANCE.getResourcesInPackage(currentGenerator.getGeneratorName() + ".workspacebase");
 					Map<String, Object> dataModel = (new BaseDataModelProvider(event.getMCreator().getWorkspace().getGenerator())).provide();
 					Iterator var4 = fileNames.iterator();
@@ -84,6 +85,9 @@ public class Launcher extends JavaPlugin {
 							break;
 						}
 					}
+				}
+				else {
+					GradlePropertiesUpdater.SetTrue(event.getMCreator().getWorkspaceFolder().toString());
 				}
 			}
 		});

@@ -1,11 +1,16 @@
+global_templates:
+  - template: animatedblockutil/listeners/blocklistener.java.ftl
+    name: "@SRCROOT/@BASEPACKAGEPATH/block/listener/ClientListener.java"
+
 templates:
   - template: ablock/block.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/block/@NAMEBlock.java"
+  - template: ablock/blockentity.java.ftl
+    name: "@SRCROOT/@BASEPACKAGEPATH/block/entity/@NAMETileEntity.java"
   - template: animatedblockutil/blockentityrenderer.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/block/renderer/@NAMETileRenderer.java"
   - template: animatedblockutil/blockentitymodel.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/block/model/@NAMEBlockModel.java"
-
 
   - template: animatedblockutil/displayitem/displayrenderer.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/block/renderer/@NAMEDisplayItemRenderer.java"
@@ -13,7 +18,6 @@ templates:
     name: "@SRCROOT/@BASEPACKAGEPATH/block/model/@NAMEDisplayModel.java"
   - template: animatedblockutil/displayitem/displayitem.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/block/display/@NAMEDisplayItem.java"
-
 
   # Worldgen
   - template: json/block_feature_biome_modifier.json.ftl
@@ -30,10 +34,6 @@ templates:
     condition: generateFeature
     name: "@MODDATAROOT/worldgen/placed_feature/@registryname.json"
 
-
-  - template: ablock/blockentity.java.ftl
-    name: "@SRCROOT/@BASEPACKAGEPATH/block/entity/@NAMETileEntity.java"
-
   # Normal block templates
   - template: ajson/block_states.json.ftl
     writer: json
@@ -45,10 +45,6 @@ templates:
     name: "@MODASSETSROOT/models/item/@registryname.json"
   - template: ajson/block_particle.json.ftl
     name: "@MODASSETSROOT/models/custom/@registryname_particle.json"
-
-global_templates:
-  - template: animatedblockutil/listeners/blocklistener.java.ftl
-    name: "@SRCROOT/@BASEPACKAGEPATH/block/listener/ClientListener.java"
 
 tags:
   - tag: BLOCKS:minecraft:mineable/pickaxe
