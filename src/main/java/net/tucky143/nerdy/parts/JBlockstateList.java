@@ -1,19 +1,19 @@
-package net.tucky143.nerdy.parts.blockstate_list;
+package net.tucky143.nerdy.parts;
 
 import net.mcreator.ui.MCreator;
 import net.mcreator.ui.component.entries.JSimpleEntriesList;
 import net.mcreator.ui.help.IHelpContext;
 import net.mcreator.ui.init.L10N;
 import net.mcreator.ui.validation.AggregatedValidationResult;
-import net.tucky143.nerdy.elements.AnimatedBlock;
+import net.tucky143.nerdy.elements.Blockstates;
 
 import javax.swing.*;
 import java.util.List;
 
-public class JBlockstateList extends JSimpleEntriesList<JBlockstateListEntry, AnimatedBlock.BlockstateListEntry> {
+public class JBlockstateList extends JSimpleEntriesList<JBlockstateListEntry, Blockstates.BlockstateListEntry> {
     public JBlockstateList(MCreator mcreator, IHelpContext gui) {
         super(mcreator, gui);
-        this.add.setText(L10N.t("elementgui.animatedblock.add_blockstate", new Object[0]));
+        this.add.setText(L10N.t("elementgui.blockstates.add_entry", new Object[0]));
     }
 
     public AggregatedValidationResult getValidationResult() {

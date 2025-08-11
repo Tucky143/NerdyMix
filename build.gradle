@@ -38,7 +38,7 @@ dependencies {
 }
 
 tasks.jar {
-    archiveFileName.set("nerdymix-2025.x.zip")
+    archiveFileName.set("nerdymix-2025.2.zip")
 }
 
 tasks.register('runMCreatorWithPlugin', JavaExec) {

@@ -8,8 +8,8 @@
   ],
   "info": {
     "name": "NerdyMix",
-    "version": "1.2.2",
+    "version": "1.4",
     "description": "Adds a bunch of NerdyPuzzles plugins",
-    "author": "Tucky143"
+    "author": "Tucky143, NerdyPuzzle"
   }
 }

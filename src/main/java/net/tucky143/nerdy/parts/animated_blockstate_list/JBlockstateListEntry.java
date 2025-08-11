@@ -1,4 +1,4 @@
-package net.tucky143.nerdy.parts.blockstate_list;
+package net.tucky143.nerdy.parts.animated_blockstate_list;
 
 import net.mcreator.ui.MCreator;
 import net.mcreator.ui.component.SearchableComboBox;

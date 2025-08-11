@@ -1,6 +1,7 @@
 package net.tucky143.nerdy.parts;
 
 import net.mcreator.element.ModElementType;
+import net.mcreator.element.ModElementTypeLoader;
 import net.mcreator.generator.GeneratorFlavor;
 import net.tucky143.nerdy.elements.*;
 import net.tucky143.nerdy.ui.modgui.*;
@@ -21,10 +22,12 @@ public class PluginElementTypes {
     public static ModElementType<?> ANIMATEDARMOR;
     public static ModElementType<?> CURIOSBAUBLE;
     public static ModElementType<?> CURIOSSLOT;
+    public static ModElementType<?> BLOCKSTATES;
+    public static ModElementType<?> ATTRIBUTE;
 
     public static void load() {
         JEIRECIPETYPE = register(
-                new ModElementType<>("jeirecipetype", (Character) 'C', JeiRecipeTypeGUI::new, JeiRecipeType.class)
+                new ModElementType<>("jeirecipetype", (Character) 'T', JeiRecipeTypeGUI::new, JeiRecipeType.class)
         );
 
         JEIRECIPE = register(
@@ -48,7 +51,7 @@ public class PluginElementTypes {
         );
 
         ANIMATEDBLOCK = register(
-                new ModElementType<>("animatedblock", (Character) 'D', AnimatedBlockGUI::new, AnimatedBlock.class)
+                new ModElementType<>("animatedblock", (Character) null, AnimatedBlockGUI::new, AnimatedBlock.class)
         ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
 
         ANIMATEDITEM = register(
@@ -56,7 +59,7 @@ public class PluginElementTypes {
         ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
 
         ANIMATEDENTITY = register(
-                new ModElementType<>("animatedentity", (Character) 'N', AnimatedEntityGUI::new, AnimatedEntity.class)
+                new ModElementType<>("animatedentity", (Character) 'E', AnimatedEntityGUI::new, AnimatedEntity.class)
         ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
 
         ANIMATEDARMOR = register(
@@ -71,6 +74,10 @@ public class PluginElementTypes {
                 new ModElementType<>("curiosslot", (Character) 'S', CuriosSlotGUI::new, CuriosSlot.class)
         ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
 
+        BLOCKSTATES = register(
+                new ModElementType<>("blockstates", (Character) null, BlockstatesGUI::new, Blockstates.class)
+        ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
     }
+
 
 }

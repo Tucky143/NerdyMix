@@ -49,7 +49,7 @@ import net.tucky143.nerdy.elements.AnimatedBlock;
 import net.tucky143.nerdy.elements.GeckolibElement;
 import net.tucky143.nerdy.parts.GeomodelRenderer;
 import net.tucky143.nerdy.parts.PluginModelActions;
-import net.tucky143.nerdy.parts.blockstate_list.JBlockstateList;
+import net.tucky143.nerdy.parts.animated_blockstate_list.JBlockstateList;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
