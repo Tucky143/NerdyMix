@@ -24,6 +24,7 @@ public class PluginElementTypes {
     public static ModElementType<?> CURIOSSLOT;
     public static ModElementType<?> BLOCKSTATES;
     public static ModElementType<?> ATTRIBUTE;
+    public static ModElementType<?> CONFIG;
 
     public static void load() {
         JEIRECIPETYPE = register(
@@ -76,6 +77,14 @@ public class PluginElementTypes {
 
         BLOCKSTATES = register(
                 new ModElementType<>("blockstates", (Character) null, BlockstatesGUI::new, Blockstates.class)
+        ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
+
+        ATTRIBUTE = register(
+                new ModElementType<>("attribute", (Character) null, AttributeGUI::new, Attribute.class)
+        ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
+
+        CONFIG = register(
+                new ModElementType<>("config", (Character) null, ConfigGUI::new, Config.class)
         ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
     }
 

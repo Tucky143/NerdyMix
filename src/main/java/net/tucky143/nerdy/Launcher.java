@@ -1,6 +1,7 @@
 package net.tucky143.nerdy;
 
 import freemarker.template.Template;
+import net.mcreator.blockly.data.BlocklyLoader;
 import net.mcreator.element.ModElementType;
 import net.mcreator.generator.Generator;
 import net.mcreator.generator.GeneratorFlavor;
@@ -13,6 +14,7 @@ import net.mcreator.plugin.PluginLoader;
 import net.mcreator.plugin.events.PreGeneratorsLoadingEvent;
 import net.mcreator.plugin.events.ui.ModElementGUIEvent;
 import net.mcreator.plugin.events.workspace.MCreatorLoadedEvent;
+import net.mcreator.ui.blockly.BlocklyEditorType;
 import net.mcreator.ui.modgui.BiomeGUI;
 import net.mcreator.ui.modgui.ModElementGUI;
 import net.tucky143.nerdy.ui.modgui.EndBiomeGUI;
@@ -47,6 +49,7 @@ public class Launcher extends JavaPlugin {
 		field.setAccessible(true);
 		((JComponent)field.get(gui)).setEnabled(false);
 	}
+	public static final BlocklyEditorType CONFIG_EDITOR = new BlocklyEditorType("config", "cfg", "config_start");
 
 	public Launcher(Plugin plugin) {
 		super(plugin);
@@ -95,6 +98,11 @@ public class Launcher extends JavaPlugin {
 		addListener(PreGeneratorsLoadingEvent.class, event -> register(new ModElementType<>("mixin", 'M', MixinGUI::new, Mixin.class)));
 
 		addListener(PreGeneratorsLoadingEvent.class, event -> PluginElementTypes.load());
+
+		addListener(PreGeneratorsLoadingEvent.class, e -> {
+			BlocklyLoader.INSTANCE.addBlockLoader(CONFIG_EDITOR);
+		});
+
 		addListener(ModElementGUIEvent.AfterLoading.class, event -> {
 			if (event.getModElementGUI() instanceof BiomeGUI biome) {
 				if (EndBiomeGUI.isEndBiome(biome.getElementFromGUI().getModElement().getName(), null, event.getMCreator())) {

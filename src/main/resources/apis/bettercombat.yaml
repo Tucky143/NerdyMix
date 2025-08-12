@@ -63,4 +63,22 @@ forge-1.20.1:
   update_files:
     - ~
 
+neoforge-1.21.1:
+  gradle: |
+    repositories {
+        maven {
+            url "https://www.cursemaven.com"
+            content {
+                includeGroup "curse.maven"
+            }
+        }
+    }
+    dependencies {
+       compileOnly 'curse.maven:better-combat-by-daedelus-639842:6532547'
+       runtimeOnly 'curse.maven:better-combat-by-daedelus-639842:6532547'
+    }
+  update_files:
+    - ~
+
+
 name: "Better Combat"
