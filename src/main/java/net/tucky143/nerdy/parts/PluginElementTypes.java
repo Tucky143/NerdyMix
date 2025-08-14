@@ -25,6 +25,8 @@ public class PluginElementTypes {
     public static ModElementType<?> BLOCKSTATES;
     public static ModElementType<?> ATTRIBUTE;
     public static ModElementType<?> CONFIG;
+    public static ModElementType<?> PARTICLEMODEL;
+    public static ModElementType<?> LOOTMODIFIER;
 
     public static void load() {
         JEIRECIPETYPE = register(
@@ -85,6 +87,14 @@ public class PluginElementTypes {
 
         CONFIG = register(
                 new ModElementType<>("config", (Character) null, ConfigGUI::new, Config.class)
+        ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
+
+        PARTICLEMODEL = register(
+                new ModElementType<>("particlemodel", (Character) null, ParticleModelGUI::new, ParticleModel.class)
+        ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
+
+        LOOTMODIFIER = register(
+                new ModElementType<>("lootmodifier", (Character) 'L', LootModifierGUI::new, LootModifier.class)
         ).coveredOn(GeneratorFlavor.baseLanguage(JAVA));
     }
 
