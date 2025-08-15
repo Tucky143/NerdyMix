@@ -9,7 +9,7 @@
   "info": {
     "name": "NerdyMix",
     "version": "1.5.1",
-    "description": "Adds a bunch of NerdyPuzzles plugins",
-    "author": "Tucky143, NerdyPuzzle"
+    "description": "Adds a bunch of plugins to improve the general MCreator experience",
+    "author": "Tucky143, NerdyPuzzle, Goldorion"
   }
 }
