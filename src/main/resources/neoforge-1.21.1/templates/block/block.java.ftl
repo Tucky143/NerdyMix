@@ -205,21 +205,21 @@ public class ${name}Block extends
 		<#if data.blockBase?has_content && data.blockBase == "Stairs">
 			super(Blocks.AIR.defaultBlockState(), <@blockProperties/>);
 		<#elseif data.blockBase?has_content && data.blockBase == "PressurePlate">
-		    <#if data.material.getUnmappedValue() == "WOOD">
+		    <#if data.material?? && data.material.getUnmappedValue() == "WOOD">
 		        super(BlockSetType.OAK, <@blockProperties/>);
 		    <#else>
 		        super(BlockSetType.IRON, <@blockProperties/>);
 		    </#if>
 		<#elseif data.blockBase?has_content && data.blockBase == "Button">
-			<#if data.material.getUnmappedValue() == "WOOD">
+			<#if data.material?? && data.material.getUnmappedValue() == "WOOD">
 		        super(BlockSetType.OAK, 30, <@blockProperties/>);
 			<#else>
 		        super(BlockSetType.STONE, 20, <@blockProperties/>);
 			</#if>
 		<#elseif data.blockBase?has_content && (data.blockBase == "TrapDoor" || data.blockBase == "Door")>
-			<#if data.material.getUnmappedValue() == "IRON">
+			<#if data.material?? && data.material.getUnmappedValue() == "IRON">
 				super(BlockSetType.IRON, <@blockProperties/>);
-			<#elseif data.material.getUnmappedValue() == "WOOD">
+			<#elseif data.material?? && data.material.getUnmappedValue() == "WOOD">
 				super(BlockSetType.OAK, <@blockProperties/>);
 			<#else>
 				super(BlockSetType.STONE, <@blockProperties/>);
