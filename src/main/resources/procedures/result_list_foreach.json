@@ -1,0 +1,48 @@
+{
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "list",
+      "check": "ResultList"
+    },
+    {
+      "type": "input_value",
+      "name": "iterator",
+      "check": "MCItem"
+    },
+    {
+      "type": "input_statement",
+      "name": "foreach"
+    }
+  ],
+  "extensions": [
+    "is_custom_loop"
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#a55ba5",
+  "mcreator": {
+    "toolbox_id": "jer_result_lists",
+    "toolbox_init": [
+      "<value name=\"iterator\"><block deletable=\"false\" movable=\"false\" enabled=\"false\" type=\"itemstack_iterator\"></block></value>"
+    ],
+    "inputs": [
+      "list"
+    ],
+    "statements": [
+      {
+        "name": "foreach",
+        "provides": [
+          {
+            "name": "itemstackiterator",
+            "type": "itemstack"
+          }
+        ]
+      }
+    ],
+    "required_apis": [
+      "jei"
+    ]
+  }
+}

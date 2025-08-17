@@ -1,0 +1,30 @@
+{
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "list",
+      "check": "ResultList"
+    },
+    {
+      "type": "input_value",
+      "name": "element",
+      "check": "MCItem"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Boolean",
+  "colour": "#5b80a5",
+  "mcreator": {
+    "toolbox_id": "jer_result_lists",
+    "toolbox_init": [
+      "<value name=\"element\"><block type=\"mcitem_all\"><field name=\"value\"></field></block></value>"
+    ],
+    "inputs": [
+      "list",
+      "element"
+    ],
+    "required_apis": [
+      "jei"
+    ]
+  }
+}

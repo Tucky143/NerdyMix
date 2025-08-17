@@ -1,0 +1,28 @@
+{
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "resultlist",
+      "check": "ResultList"
+    },
+    {
+      "type": "input_value",
+      "name": "arraylist",
+      "check": "ArrayList"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#a55ba5",
+  "mcreator": {
+    "toolbox_id": "jer_utils",
+    "inputs": [
+      "resultlist",
+      "arraylist"
+    ],
+    "required_apis": [
+      "jei"
+    ]
+  }
+}

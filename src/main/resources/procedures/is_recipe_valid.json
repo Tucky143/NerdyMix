@@ -1,0 +1,56 @@
+{
+  "args0": [
+    {
+      "type": "field_data_list_selector",
+      "name": "recipe",
+      "datalist": "recipes",
+      "customEntryProviders": "jeirecipetype"
+    }
+  ],
+  "mutator": "ingredient_list_mutator",
+  "output": "Boolean",
+  "colour": "#5b80a5",
+  "mcreator": {
+    "toolbox_id": "jer_recipes",
+    "toolbox_init": [
+      "<mutation inputs=\"1\"></mutation>"
+    ],
+    "repeating_inputs": [
+      {
+        "name": "entry"
+      }
+    ],
+    "repeating_fields": [
+      {
+        "name": "type",
+        "field_definition": {
+          "type": "field_dropdown"
+        }
+      },
+      {
+        "name": "name",
+        "field_definition": {
+          "type": "field_input"
+        }
+      },
+      {
+        "name": "consume",
+        "field_definition": {
+          "type": "field_checkbox"
+        }
+      }
+    ],
+    "fields": [
+      "recipe"
+    ],
+    "dependencies": [
+      {
+        "name": "world",
+        "type": "world"
+      }
+    ],
+    "required_apis": [
+      "jei"
+    ]
+  }
+}

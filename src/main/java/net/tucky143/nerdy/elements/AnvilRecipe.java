@@ -10,8 +10,8 @@ public class AnvilRecipe extends GeneratableElement {
     public int rightcost;
     public int xpcost;
     public MItemBlock output;
+
     public AnvilRecipe(ModElement element) {
         super(element);
     }
-
 }
