@@ -44,4 +44,12 @@ public class ${JavaModName}JeiPlugin implements IModPlugin {
 	    </#list>
 	}
 
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        <#list jeirecipetypes as type>
+            <#if type.clickableArea>
+                registration.addRecipeClickArea(${type.caGui}Screen.class, ${type.caX}, ${type.caY}, ${type.caWidth}, ${type.caHeight}, ${type.getModElement().getName()}_Type);
+            </#if>
+        </#list>
+    }
 }</#compress>

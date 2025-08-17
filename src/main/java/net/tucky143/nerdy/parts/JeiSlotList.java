@@ -11,10 +11,12 @@ import javax.swing.*;
 import java.util.List;
 
 public class JeiSlotList extends JSimpleEntriesList<JeiSlotListEntry, JeiRecipeType.JeiSlotListEntry> {
+    private final Object[] noParams = new Object[0];
+
     public JeiSlotList(MCreator mcreator, IHelpContext gui) {
         super(mcreator, gui);
-        this.add.setText(L10N.t("elementgui.jeirecipetype.add_entry", new Object[0]));
-        this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Theme.current().getForegroundColor(), 1), L10N.t("elementgui.jeirecipetype.slots", new Object[0]), 0, 0, this.getFont().deriveFont(12.0F), Theme.current().getForegroundColor()));
+        this.add.setText(L10N.t("elementGui.jeiRecipeType.add_entry", noParams));
+        this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Theme.current().getForegroundColor(), 1), L10N.t("elementGui.jeiRecipeType.slots", noParams), 0, 0, this.getFont().deriveFont(12.0F), Theme.current().getForegroundColor()));
     }
 
     protected JeiSlotListEntry newEntry(JPanel parent, List<JeiSlotListEntry> entryList, boolean userAction) {

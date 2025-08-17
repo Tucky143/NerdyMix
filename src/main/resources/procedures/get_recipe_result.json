@@ -7,16 +7,38 @@
       "customEntryProviders": "jeirecipetype"
     }
   ],
-  "mutator": "item_list_mutator",
+  "mutator": "ingredient_list_mutator",
   "output": "MCItem",
-  "colour": 350,
+  "colour": "#a55b67",
   "mcreator": {
-    "toolbox_id": "just_enough_recipes",
+    "toolbox_id": "jer_recipes",
     "toolbox_init": [
       "<mutation inputs=\"1\"></mutation>"
     ],
     "repeating_inputs": [
-      "entry"
+      {
+        "name": "entry"
+      }
+    ],
+    "repeating_fields": [
+      {
+        "name": "type",
+        "field_definition": {
+          "type": "field_dropdown"
+        }
+      },
+      {
+        "name": "name",
+        "field_definition": {
+          "type": "field_input"
+        }
+      },
+      {
+        "name": "consume",
+        "field_definition": {
+          "type": "field_checkbox"
+        }
+      }
     ],
     "fields": [
       "recipe"

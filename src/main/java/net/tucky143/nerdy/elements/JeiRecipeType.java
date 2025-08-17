@@ -4,8 +4,11 @@ import net.mcreator.element.GeneratableElement;
 import net.mcreator.element.parts.MItemBlock;
 import net.mcreator.ui.workspace.resources.TextureType;
 import net.mcreator.workspace.elements.ModElement;
+import net.mcreator.workspace.references.ModElementReference;
 import net.mcreator.workspace.references.TextureReference;
 
+
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,44 +23,26 @@ public class JeiRecipeType extends GeneratableElement {
     public List<MItemBlock> craftingtables;
     public boolean enableCraftingtable;
     public String title;
+    @ModElementReference @Nullable public String caGui;
+    public boolean clickableArea;
+    public int caX;
+    public int caY;
+    public int caWidth;
+    public int caHeight;
     public List<JeiSlotListEntry> slotList = new ArrayList<>();
 
     public static class JeiSlotListEntry {
         public JeiSlotListEntry() {}
 
         public String type;
+        public String name;
         public int x;
         public int y;
-        public int slotid;
+        public boolean optional;
     }
 
-
-    public JeiRecipeType(ModElement element) { super(element); }
-
-    public int getIngredientCount() {
-        int count = 0;
-
-        for (int i = 0; i < slotList.size(); i++) {
-            JeiSlotListEntry entry = slotList.get(i);
-
-            if (entry.type.equals("INPUT")) {
-                boolean isUnique = true;
-                for (int j = 0; j < i; j++) {
-                    JeiSlotListEntry previousEntry = slotList.get(j);
-                    if (entry.slotid == previousEntry.slotid) {
-                        isUnique = false;
-                        break;
-                    }
-                }
-
-                if (isUnique) {
-                    count++;
-                }
-            }
-        }
-
-        return count;
+    public JeiRecipeType(ModElement element) {
+        super(element);
     }
-
 }
 

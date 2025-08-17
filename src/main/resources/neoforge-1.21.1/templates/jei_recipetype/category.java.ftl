@@ -47,12 +47,15 @@ public class ${name}RecipeCategory implements IRecipeCategory<${name}Recipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, ${name}Recipe recipe, IFocusGroup focuses) {
         <#list data.slotList as slot>
-            <#if slot.type == "INPUT">
-                builder.addSlot(RecipeIngredientRole.INPUT, ${slot.x}, ${slot.y}).addIngredients(recipe.getIngredients().get(${slot.slotid}));
+            <#if slot.type == "ITEM_INPUT">
+                builder.addSlot(RecipeIngredientRole.INPUT, ${slot.x}, ${slot.y}).addIngredients(VanillaTypes.ITEM_STACK, Arrays.asList(recipe.${slot.name}ItemInput().getItems()));
+            <#elseif slot.type == "FLUID_INPUT">
+                builder.addSlot(RecipeIngredientRole.INPUT, ${slot.x}, ${slot.y}).addFluidStack(recipe.${slot.name}FluidInput().getFluid(), 1000)
+                    .addRichTooltipCallback((slot, tooltip) ->
+                        tooltip.add(Component.literal(recipe.${slot.name}FluidInput().getAmount() + " mb")));
             <#else>
-                builder.addSlot(RecipeIngredientRole.OUTPUT, ${slot.x}, ${slot.y}).addItemStack(recipe.getResultItem(null));
+                builder.addSlot(RecipeIngredientRole.OUTPUT, ${slot.x}, ${slot.y}).addItemStack(recipe.getResult(0));
             </#if>
         </#list>
     }
-
 }

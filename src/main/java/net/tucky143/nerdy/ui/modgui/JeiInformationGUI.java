@@ -20,6 +20,8 @@ import java.net.URISyntaxException;
 import java.util.function.Function;
 
 public class JeiInformationGUI extends ModElementGUI<JeiInformation> {
+    private final Object[] noParams = new Object[0];
+
     private MCItemListField items;
     private JStringListField information;
 
@@ -33,28 +35,38 @@ public class JeiInformationGUI extends ModElementGUI<JeiInformation> {
         items = new MCItemListField(this.mcreator, ElementUtil::loadBlocksAndItems, false, false);
         information = new JStringListField(this.mcreator, (Function)null);
 
-        JPanel pane1 = new JPanel(new BorderLayout());
-        pane1.setOpaque(false);
-        JPanel mainPanel = new JPanel(new GridLayout(2, 2, 0, 2));
+        // Global
+        JPanel globalPanel = new JPanel(new BorderLayout());
+        globalPanel.setOpaque(false);
+
+        // Main
+        JPanel mainPanel = new JPanel(new GridLayout(3, 1, 0, 0));
         mainPanel.setOpaque(false);
 
-        mainPanel.add(HelpUtils.wrapWithHelpButton(this.withEntry("jei/info_items"), L10N.label("elementgui.jeiinformation.info_items", new Object[0])));
-        mainPanel.add(items);
-        mainPanel.add(HelpUtils.wrapWithHelpButton(this.withEntry("jei/items_info"), L10N.label("elementgui.jeiinformation.items_info", new Object[0])));
+        // Item Panel
+        JPanel itemPanel = new JPanel(new GridLayout(0, 2,2, 0));
+        itemPanel.setOpaque(false);
+        itemPanel.add(HelpUtils.wrapWithHelpButton(this.withEntry("jei/info/info_items"), L10N.label("elementGui.jeiInformation.info_items", noParams)));
+        items.setPreferredSize(new Dimension(250, 34));
+        itemPanel.add(items);
+        mainPanel.add(itemPanel);
+
+        mainPanel.add(HelpUtils.wrapWithHelpButton(this.withEntry("jei/info/items_info"), L10N.label("elementGui.jeiInformation.items_info", noParams)));
+        information.setPreferredSize(new Dimension(400, 34));
         mainPanel.add(information);
 
-        pane1.add(PanelUtils.totalCenterInPanel(mainPanel));
-        addPage(pane1);
+        globalPanel.add(PanelUtils.totalCenterInPanel(mainPanel));
+        addPage(globalPanel);
 
     }
 
     protected AggregatedValidationResult validatePage(int page) {
         if (!mcreator.getWorkspaceSettings().getDependencies().contains("jei"))
-            return new AggregatedValidationResult.FAIL(L10N.t("elementgui.jei.needs_api", new Object[0]));
+            return new AggregatedValidationResult.FAIL(L10N.t("elementGui.jei.needs_api", noParams));
         if (items.getListElements().isEmpty())
-            return new AggregatedValidationResult.FAIL(L10N.t("elementgui.jeiinformation.needs_items", new Object[0]));
+            return new AggregatedValidationResult.FAIL(L10N.t("elementGui.jeiInformation.needs_items", noParams));
         if (information.getTextList().isEmpty())
-            return new AggregatedValidationResult.FAIL(L10N.t("elementgui.jeiinformation.needs_description", new Object[0]));
+            return new AggregatedValidationResult.FAIL(L10N.t("elementGui.jeiInformation.needs_description", noParams));
         return new AggregatedValidationResult.PASS();
     }
 
@@ -70,10 +82,7 @@ public class JeiInformationGUI extends ModElementGUI<JeiInformation> {
         return info;
     }
 
-    @Override
-    @Nullable
-    public URI contextURL() throws URISyntaxException {
+    @Override public @Nullable URI contextURL() throws URISyntaxException {
         return null;
     }
-
 }

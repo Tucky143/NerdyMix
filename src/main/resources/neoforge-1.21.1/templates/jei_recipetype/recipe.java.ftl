@@ -4,32 +4,36 @@ package ${package}.jei_recipes;
 
 import javax.annotation.Nullable;
 
-public class ${name}Recipe implements Recipe<RecipeInput> {
-    private final ItemStack output;
-    private final NonNullList<Ingredient> recipeItems;
-
-    public ${name}Recipe(ItemStack output, NonNullList<Ingredient> recipeItems) {
-        this.output = output;
-        this.recipeItems = recipeItems;
-    }
+public record ${name}Recipe(
+    <#list data.slotList as slot>
+        <#if slot.type == "ITEM_INPUT">
+            SizedIngredient ${slot.name}ItemInput,
+        <#elseif slot.type == "FLUID_INPUT">
+            FluidStack ${slot.name}FluidInput,
+        </#if>
+    </#list>
+    SizedIngredient output
+) implements Recipe<RecipeInput> {
 
     @Override
-    public boolean matches(RecipeInput pContainer, Level pLevel) {
-        if(pLevel.isClientSide()) {
-            return false;
+    public @Nonnull NonNullList<Ingredient> getIngredients() {
+        List<SizedIngredient> sizedIngredients = new ArrayList<>();
+        <#list data.slotList as slot>
+            <#if slot.type == "ITEM_INPUT">
+                sizedIngredients.add(${slot.name}ItemInput);
+            </#if>
+        </#list>
+
+        NonNullList<Ingredient> ingredients = NonNullList.createWithCapacity(sizedIngredients.size());
+        for(SizedIngredient sizedIngredient : sizedIngredients) {
+            ingredients.add(sizedIngredient.ingredient());
         }
+        return ingredients;
+    }
 
+    @Override
+    public boolean matches(@NotNull RecipeInput pContainer, @NotNull Level Level) {
         return false;
-    }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        return recipeItems;
-    }
-
-    @Override
-    public ItemStack assemble(RecipeInput input, HolderLookup.Provider holder) {
-        return output;
     }
 
     @Override
@@ -38,18 +42,28 @@ public class ${name}Recipe implements Recipe<RecipeInput> {
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.Provider provider) {
-        return output.copy();
+    public @NotNull ItemStack getResultItem(HolderLookup.Provider provider) {
+        return ItemStack.EMPTY;
+    }
+
+    public @NotNull ItemStack getResult(int resultIndex) {
+        ItemStack[] stack = output.getItems();
+        return stack[0];
     }
 
     @Override
-    public RecipeType<?> getType() {
-        return Type.INSTANCE;
+    public ItemStack assemble(@NotNull RecipeInput input, @NotNull HolderLookup.Provider holder) {
+        return ItemStack.EMPTY;
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<?> getSerializer() {
         return Serializer.INSTANCE;
+    }
+
+    @Override
+    public @NotNull RecipeType<?> getType() {
+        return Type.INSTANCE;
     }
 
     public static class Type implements RecipeType<${name}Recipe> {
@@ -59,53 +73,91 @@ public class ${name}Recipe implements Recipe<RecipeInput> {
 
     public static class Serializer implements RecipeSerializer<${name}Recipe> {
         public static final Serializer INSTANCE = new Serializer();
-        private static final MapCodec<${name}Recipe> CODEC = RecordCodecBuilder.mapCodec(
-            builder -> builder.group(
-                        ItemStack.STRICT_CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
-                        Ingredient.CODEC_NONEMPTY
-                            .listOf()
-                            .fieldOf("ingredients")
-                            .flatXmap(
-                                ingredients -> {
-                                    Ingredient[] aingredient = ingredients
-                                              .toArray(Ingredient[]::new); // Skip the empty check and create the array.
-                                    if (aingredient.length == 0) {
-                                        return DataResult.error(() -> "No ingredients found in custom recipe");
-                                    } else {
-                                        return DataResult.success(NonNullList.of(Ingredient.EMPTY, aingredient));
-                                    }
-                                },
-                                DataResult::success
-                            )
-                            .forGetter(recipe -> recipe.recipeItems)
-                    )
-                    .apply(builder, ${name}Recipe::new)
+
+        public final MapCodec<${name}Recipe> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(
+                <#list data.slotList as slot>
+                    <#if slot.type == "ITEM_INPUT">
+                        <#if slot.optional>
+                            SizedIngredient.FLAT_CODEC.optionalFieldOf("${slot.name}", new SizedIngredient(Ingredient.EMPTY, 1)).forGetter(${name}Recipe::${slot.name}ItemInput),
+                        <#else>
+                            SizedIngredient.FLAT_CODEC.fieldOf("${slot.name}").forGetter(${name}Recipe::${slot.name}ItemInput),
+                        </#if>
+                    <#elseif slot.type == "FLUID_INPUT">
+                        FluidStack.CODEC.fieldOf("${slot.name}").forGetter(${name}Recipe::${slot.name}FluidInput),
+                    </#if>
+                </#list>
+                SizedIngredient.FLAT_CODEC.fieldOf("output").forGetter(${name}Recipe::output)
+            ).apply(instance, Serializer::create${name}Recipe)
         );
-        public static final StreamCodec<RegistryFriendlyByteBuf, ${name}Recipe> STREAM_CODEC = StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
+
+        private static final StreamCodec<RegistryFriendlyByteBuf, ${name}Recipe> STREAM_CODEC = StreamCodec.of(
+            Serializer::write,
+            Serializer::read
+        );
 
         @Override
-        public MapCodec<${name}Recipe> codec() {
+        public @NotNull MapCodec<${name}Recipe> codec() {
             return CODEC;
         }
 
         @Override
-        public StreamCodec<RegistryFriendlyByteBuf, ${name}Recipe> streamCodec() {
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, ${name}Recipe> streamCodec() {
             return STREAM_CODEC;
         }
 
-        private static ${name}Recipe fromNetwork(RegistryFriendlyByteBuf buf) {
-            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);
-            inputs.replaceAll(ingredients -> Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
-            return new ${name}Recipe(ItemStack.STREAM_CODEC.decode(buf), inputs);
+        private static ${name}Recipe read(RegistryFriendlyByteBuf buffer) {
+            <#list data.slotList as slot>
+                <#if slot.type == "ITEM_INPUT">
+                    SizedIngredient ${slot.name}ItemInput = SizedIngredient.STREAM_CODEC.decode(buffer);
+                <#elseif slot.type == "FLUID_INPUT">
+                    FluidStack ${slot.name}FluidInput = FluidStack.STREAM_CODEC.decode(buffer);
+                </#if>
+            </#list>
+            SizedIngredient output = SizedIngredient.STREAM_CODEC.decode(buffer);
+            return new ${name}Recipe(
+                <#list data.slotList as slot>
+                    <#if slot.type == "ITEM_INPUT">
+                        ${slot.name}ItemInput,
+                    <#elseif slot.type == "FLUID_INPUT">
+                        ${slot.name}FluidInput,
+                    </#if>
+                </#list>
+                output
+            );
         }
 
-        private static void toNetwork(RegistryFriendlyByteBuf buf, ${name}Recipe recipe) {
-            buf.writeVarInt(recipe.getIngredients().size());
-            for (Ingredient ing : recipe.getIngredients()) {
-                Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ing);
-            }
-            ItemStack.STREAM_CODEC.encode(buf, recipe.getResultItem(null));
+        private static void write(RegistryFriendlyByteBuf buffer, ${name}Recipe recipe) {
+            <#list data.slotList as slot>
+                <#if slot.type == "ITEM_INPUT">
+                    SizedIngredient.STREAM_CODEC.encode(buffer, recipe.${slot.name}ItemInput);
+                <#elseif slot.type == "FLUID_INPUT">
+                    FluidStack.STREAM_CODEC.encode(buffer, recipe.${slot.name}FluidInput);
+                </#if>
+            </#list>
+            SizedIngredient.STREAM_CODEC.encode(buffer, recipe.output);
+        }
+
+        static ${name}Recipe create${name}Recipe(
+            <#list data.slotList as slot>
+                <#if slot.type == "ITEM_INPUT">
+                    SizedIngredient ${slot.name}ItemInput,
+                <#elseif slot.type == "FLUID_INPUT">
+                    FluidStack ${slot.name}FluidInput,
+                </#if>
+            </#list>
+            SizedIngredient output
+        ) {
+            return new ${name}Recipe(
+                <#list data.slotList as slot>
+                    <#if slot.type == "ITEM_INPUT">
+                        ${slot.name}ItemInput,
+                    <#elseif slot.type == "FLUID_INPUT">
+                        ${slot.name}FluidInput,
+                    </#if>
+                </#list>
+                output
+            );
         }
     }
-
 }</#compress>
